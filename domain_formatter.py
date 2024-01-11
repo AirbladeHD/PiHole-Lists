@@ -17,16 +17,16 @@ def format_domain(url):
     for l in f.readlines():
         new_line = l.replace("||", "").replace("^", "").replace("\n", "")
         o.write(new_line + "\n")
-        all_in_one.write(new_line + "\n")
 
     os.remove(list_name)
     os.rename(list_name + ".new", list_name)
+    sources.write("https://raw.githubusercontent.com/AirbladeHD/PiHole-Lists/master/{}\n".format(list_name))
 
     print("\nFormatieren von {} abgeschlossen!".format(list_name))
     print("===================================================================================================\n")
 
 domains = open(sys.argv[1], "r")
-all_in_one = open("all_in_one", "w")
+sources = open("sources", "w")
 
 for domain in domains.readlines():
     format_domain(domain.replace("\n", ""))
